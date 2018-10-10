@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <title>Stock API</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <span class="navbar-brand mb-0 h1">Search for Stocks</span>
+    </nav>
+    <div class="container">
+        <!-- stocks will Get Dumped Here -->
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Company Name</th>
+                    <th scope="col">Stock Symbol</th>
+                    <th scope="col">Pricet</th>
+                    <th scope="col">News</th>
+                </tr>
+            </thead>
+            <tbody id="stocks-table"></tbody>
+        </table>
+
+
+
+            <!-- Rendered Buttons will get Dumped Here  -->
+            <div id="buttons-view"></div>
+
+            <form id="stock-form">
+                <label for="stock-input">Add a Stock Symbol</label>
+                <input type="text" id="stock-input">
+                <br>
+
+                <!-- Button triggers new stock to be added -->
+                <input id="add-stock" type="submit" value="Add a Stock Symbol">
+            </form>
+
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src='app.js'></script>
+</body>
+
+</html>
