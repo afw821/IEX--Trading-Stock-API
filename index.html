@@ -15,16 +15,17 @@
         <span class="navbar-brand mb-0 h1">Search for Stocks</span>
     </nav>
     <div class="container">
-        <!-- stocks will Get Dumped Here -->
+       
         <table class="table">
             <thead class="thead-dark">
-                <tr>
+                <tr><th scope="col">Image</th>
                     <th scope="col">Company Name</th>
                     <th scope="col">Stock Symbol</th>
-                    <th scope="col">Pricet</th>
+                    <th scope="col">Price</th>
                     <th scope="col">News</th>
                 </tr>
             </thead>
+             <!-- stocks will Get Dumped Here -->
             <tbody id="stocks-table"></tbody>
         </table>
 
@@ -37,7 +38,6 @@
                 <label for="stock-input">Add a Stock Symbol</label>
                 <input type="text" id="stock-input">
                 <br>
-
                 <!-- Button triggers new stock to be added -->
                 <input id="add-stock" type="submit" value="Add a Stock Symbol">
             </form>
