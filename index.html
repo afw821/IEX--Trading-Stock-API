@@ -15,35 +15,49 @@
         <span class="navbar-brand mb-0 h1">Search for Stocks</span>
     </nav>
     <div class="container">
-       
-        <table class="table">
-            <thead class="thead-dark">
-                <tr><th scope="col">Image</th>
-                    <th scope="col">Company Name</th>
-                    <th scope="col">Stock Symbol</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">News</th>
-                </tr>
-            </thead>
-             <!-- stocks will Get Dumped Here -->
-            <tbody id="stocks-table"></tbody>
-        </table>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Image</th>
+                            <th scope="col">Company Name</th>
+                            <th scope="col">Stock Symbol</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">News</th>
+                        </tr>
+                    </thead>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- stocks will Get Dumped Here -->
+                <tbody id="stocks-table"></tbody>
+                </table>
+            </div>
+        </div>
 
 
-
-            <!-- Rendered Buttons will get Dumped Here  -->
-            <div id="buttons-view"></div>
-
-            <form id="stock-form">
-                <label for="stock-input">Add a Stock Symbol</label>
-                <input type="text" id="stock-input">
-                <br>
-                <!-- Button triggers new stock to be added -->
-                <input id="add-stock" type="submit" value="Add a Stock Symbol">
-            </form>
-
-            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-            <script src='app.js'></script>
+        <!-- Rendered Buttons will get Dumped Here  -->
+        <div class="row">
+            <div class="col-md-12">
+                <div id="buttons-view"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <form id="stock-form">
+                    <label for="stock-input">Add a Stock Symbol</label>
+                    <input type="text" id="stock-input">
+                    <br>
+                    <!-- Button triggers new stock to be added -->
+                    <input id="add-stock" type="submit" value="Add a Stock Symbol">
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src='app.js'></script>
 </body>
 
 </html>

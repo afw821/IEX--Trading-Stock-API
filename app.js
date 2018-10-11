@@ -15,7 +15,7 @@ const displayStockInfo = function () {
   }).then(function(response) {
     //console.log response to test
   console.log(response);
-    
+    //Use response to create const for items in the object
     const companyName = response.quote.companyName;
     const stockSymbol = response.quote.symbol;
     const stockPrice = response.quote.latestPrice;
@@ -37,13 +37,15 @@ const displayStockInfo = function () {
   });
 
 }
+//This listener allows stock info to be appended when stock btn is pushed
+$('#buttons-view').on('click', '.stock-btn', displayStockInfo); 
 
 // Function for displaying stock buttons initally when page loads
 const render = function () {
   // Deleting the stocks prior to adding new stocks
   // (this is necessary otherwise you will have repeat buttons)
   $('#buttons-view').empty();
-  // Looping through the array of stocks
+  // Looping through the array of stocks to render initial buttons
   for (let i = 0; i < stocks.length; i++) {
     // Then dynamicaly generating buttons for each stock in the array
     const newButton = $('<button>'); 
@@ -57,6 +59,8 @@ const render = function () {
     $('#buttons-view').append(newButton);
   }
 }
+// Calling the renderButtons function to display the intial buttons
+render();
 
 // This function handles events where one button is clicked
 // const addButton = function(event) {
@@ -81,11 +85,9 @@ const render = function () {
 // // Even listener for #add-stock button
 // $('#add-stock').on('click', addButton);
 
-//This listener allows stock info to be appended when stock btn is pushed
-$('#buttons-view').on('click', '.stock-btn', displayStockInfo); 
 
-// Calling the renderButtons function to display the intial buttons
-render();
+
+
 
 const validateSymbol = function(event){
   event.preventDefault();
