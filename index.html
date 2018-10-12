@@ -51,10 +51,16 @@
                     <input type="text" id="stock-input">
                     <br>
                     <!-- Button triggers new stock to be added -->
-                    <input id="add-stock" type="submit" value="Add a Stock Symbol">
+                    <input class="btn btn-primary" id="add-stock" type="submit" value="Add a Stock Symbol">
                 </form>
             </div>
         </div>
+        <div class='row'>
+            <div class='col-md-4'>
+                <button type="button" class="btn btn-primary favorite">Add To Favorite</button>
+            </div>
+        </div>
+        <div class='favorite-stocks'></div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src='app.js'></script>
