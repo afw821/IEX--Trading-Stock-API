@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
+        crossorigin="anonymous">   
     <title>Stock API</title>
 </head>
 
@@ -44,7 +44,7 @@
                 <div id="buttons-view"></div>
             </div>
         </div>
-        <div class="row">
+        <div class="row fav-row">
             <div class="col-md-4">
                 <form id="stock-form">
                     <label for="stock-input">Add a Stock Symbol</label>
@@ -60,7 +60,12 @@
                 <button type="button" class="btn btn-primary favorite">Add To Favorite</button>
             </div>
         </div>
-        <div class='favorite-stocks'></div>
+        <div class='row'>
+            <div class='col-md-12'>
+                <p>Add stock symbol above and click favorite to add to favorites!</p>
+                <div class='favorite-stocks'></div>
+            </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src='app.js'></script>

@@ -19,7 +19,8 @@ const displayStockInfo = function () {
     const companyName = response.quote.companyName;
     const stockSymbol = response.quote.symbol;
     const stockPrice = response.quote.latestPrice;
-    const companyNews = response.news[0].headline;
+    // const companyNews = response.news[0].headline;
+    const companyNews = response.news[0].url;
     const logo = response.logo.url;
 
     // Creating a table to be appended displaying stock info
@@ -30,7 +31,7 @@ const displayStockInfo = function () {
         <td>${companyName}</td>
         <td>${stockSymbol}</td>
         <td>${stockPrice}</td>
-        <td>${companyNews}</td>
+        <td><a href='${companyNews}'>Click for news!</a></td>
       </tr>)`);
 
     $('.stocks').append(nameHolder);
