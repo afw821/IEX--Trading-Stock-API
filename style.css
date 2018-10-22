@@ -1,0 +1,40 @@
+body{
+    background-image: url('assets/wallst.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+.nav-bar{
+    opacity:0.6;
+    
+}
+label{
+    color:black;
+    font-weight:bolder;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 26px;
+}
+.stock-jumbo{
+    margin-top:30px;
+    opacity:0.8;
+    border-radius: 6px;
+}
+.nav-name{
+    font-size:32px;
+    font-family:Arial, Helvetica, sans-serif;
+}
+p{
+    font-size:20px;
+    font-weight:bolder;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.stock-card{
+    opacity: 0.8;
+    margin-bottom:50px;
+    border-radius:6px;
+}
+.fav-row{
+    margin-bottom:50px;
+}
+.hide{
+    display: none;
+}

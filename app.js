@@ -1,6 +1,5 @@
 // Initial array of stocks
 const stocks = ['FB', 'AAPL', 'TSLA', 'GOOG'];
-
 // displaystockInfo function displays stock info as a table when stock btns get pressed (#buttons-view)
 const displayStockInfo = function () {
 
@@ -15,6 +14,7 @@ const displayStockInfo = function () {
   }).then(function (response) {
     //console.log response to test
     console.log(response);
+
     //Use response to create const for items in the object
     const companyName = response.quote.companyName;
     const stockSymbol = response.quote.symbol;
@@ -22,7 +22,7 @@ const displayStockInfo = function () {
     const logo = response.logo.url;
     // const companyNews = response.news[0].headline;
     const companyNews = response.news[0].url;
-  
+
     // Creating a table to be appended displaying stock info
 
     const nameHolder = $('#stocks-table').html(`
@@ -33,7 +33,7 @@ const displayStockInfo = function () {
         <td>${stockPrice}</td>
         <td><a class='anchor'href='${companyNews}'>Click for news!</a></td>
       </tr>)`);
-    
+
     $('.stocks').append(nameHolder);
   });
 
@@ -53,12 +53,15 @@ const render = function () {
     // Adding a class of stock-btn to our button
     newButton.addClass('stock-btn');
     newButton.addClass('btn btn-primary');
+    newButton.addClass('btn-dark');
     // Adding a data-attribute
     newButton.attr('data-name', stocks[i]);
     // Providing the initial button text
     newButton.text(stocks[i]);
     // Adding the button to the buttons-view div
     $('#buttons-view').append(newButton);
+    $('.clear').addClass('hide');
+    $('h2').addClass('hide');
   }
 }
 // Calling the renderButtons function to display the intial buttons
@@ -76,12 +79,14 @@ const validateSymbol = function (event) {
   const stockUC = stock.toUpperCase();
   //URL for all data symbols on IEX trading
   const apiSymbols = 'https://api.iextrading.com/1.0/ref-data/symbols';
+
   //AJAX Call
   $.ajax({
     url: apiSymbols,
     method: 'GET'
   }).then(function (responseTwo) {
     const validationList = responseTwo;
+    console.log(responseTwo);
     //Loop through array of objects returned by AJAX
     for (let i = 0; i < validationList.length; i++) {
       //IF USER input uppercase strictly equal to stock symbol in AJAX return
@@ -96,11 +101,18 @@ const validateSymbol = function (event) {
         newButtonHTML.on('click', displayStockInfo);
         //Append newly generated buttons to buttons-view div
         $('#buttons-view').append(newButtonHTML);
+       
         render();
-        return;
-      } else {
-        $('#stock-input').val('');
+        // return;
+      } else if( ($('.clear').removeClass('hide')) === true && ($('h2').removeClass('hide')) === true) {
+        $('.clear').addClass('hide');
+        $('h2').addClass('hide');
+        // $('#stock-input').val('');
 
+      }else{
+        $('.clear').removeClass('hide');
+        $('h2').removeClass('hide');
+        $('#stock-input').val('');
       }
     }
   });
@@ -110,30 +122,98 @@ $('#add-stock').on('click', validateSymbol);
 
 //Add to favorite function
 const addFavorite = function () {
-  const apiSymbols = 'https://api.iextrading.com/1.0/ref-data/symbols';
-  const stock = $('#stock-input').val();
+  const stock = $('#favorite-input').val();
   const stockUC = stock.toUpperCase();
-  const stockUCButton = $(`<button class="new-stock-btn btn btn-primary" val="${stockUC}">${stockUC}
-</button>&nbsp;`);
+  const logoURL = `https://api.iextrading.com/1.0/stock/${stock}/batch?types=quote,logo,news&range=1m&last=10&filter=symbol,companyName,latestPrice,headline,source,url`;
   $.ajax({
-    url: apiSymbols,
+    url: logoURL,
     method: 'GET'
   }).then(function (responseThree) {
-    const validationListTwo = responseThree;
-    //Loop through array of objects returned by AJAX
-    for (let i = 0; i < validationListTwo.length; i++) {
-      if (stock.length >= 1 && stockUC === responseThree[i].symbol) {
-        $('.favorite-stocks').append(stockUCButton);
-      } else {
-        $('#stock-input').val('');
-      }
+    const loGo = responseThree.logo.url;
+    const companyNAME = responseThree.quote.companyName;
+    const stockSymbol = responseThree.quote.symbol;
+    if (stock.length >= 1 && stockUC === stockSymbol) {
+      $('.favorite-stocks').append(`<div class="card" style="width: 18rem; float: left; opacity: 0.6;">
+      <img src='${loGo}' alt='stock-pic'>
+  <div class="card-body">
+  <h5 class="card-title">${companyNAME}</h5>
+    <button class="new-stock-btn btn btn-dark" val="${stockSymbol}">${stockSymbol}
+      </button>&nbsp;
+  </div>
+</div>`);
+      $('h2').removeClass('hide');
+      $('.clear').removeClass('hide');
+      $('#favorite-input').val('');
+    } else {
+      $('#favorite-input').val('');
     }
   });
 }
 $('.favorite').on('click', addFavorite);
 
-const clear = function(){
+const clear = function () {
   $('#buttons-view').empty();
   $('.favorite-stocks').empty();
+  $('h2').addClass('hide');
+  $('.clear').addClass('hide');
 }
 $('.clear').on('click', clear);
+
+//Search for a stock symbol by entering company name
+
+const searchStock = function (event) {
+  //preventDefault prevents
+  event.preventDefault();
+  //Variable stock assigned stock input id
+  const stockInput = $('#search-input').val().trim();
+
+
+
+  //URL for all data symbols on IEX trading
+  const apiSymbols = 'https://api.iextrading.com/1.0/ref-data/symbols';
+
+  //AJAX Call
+  $.ajax({
+    url: apiSymbols,
+    method: 'GET'
+  }).then(function (responseFour) {
+    // const validationListTwo = responseFour;
+    console.log(responseFour);
+    //Loop through array of objects returned by AJAX
+    for (let i = 0; i < responseFour.length; i++) {
+      //IF USER input uppercase strictly equal to stock symbol in AJAX return
+      if (stockInput === responseFour[i].name) {
+        // console.log('hello');
+        //Push item in array
+        console.log(responseFour[i].name);
+        let stockSym = responseFour[i].symbol;
+        // searchResult.push(responseFour[i].symbol);
+        //Dynamically generated stock buttons
+        let searchResultHTML = $(`<div class="card" style="width: 18rem; float: left;">
+        <div class="card-body">
+          <h5 class="card-title">Stock Symbol for ${stockInput}</h5>
+          <p class="card-text">${stockSym}</p>
+        </div>
+      </div>`);
+
+
+        //Append newly generated buttons to buttons-view div
+        $('.search-result').append(searchResultHTML);
+        render();
+        // return true;
+      } else if (( ($('.clear').removeClass('hide')) === true && ($('h2').removeClass('hide')) === true)) {
+        $('.clear').addClass('hide');
+        $('h2').addClass('hide');
+      
+
+        // alert('Please enter a valid company name');
+        // return false;
+      }else{
+        $('.clear').removeClass('hide');
+        $('h2').removeClass('hide');
+        // $('#search-input').val('');
+    }
+  };
+  });
+}
+$('#search-stock').on('click', searchStock);
