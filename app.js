@@ -182,7 +182,7 @@ const searchStock = function (event) {
     //Loop through array of objects returned by AJAX
     for (let i = 0; i < responseFour.length; i++) {
       //IF USER input uppercase strictly equal to stock symbol in AJAX return
-      if (stockInput.match(responseFour[i].name) === responseFour[i].name) {
+      if (stockInput === responseFour[i].name) {
         // console.log('hello');
         //Push item in array
         console.log(responseFour[i].name);
