@@ -12,8 +12,6 @@ const displayStockInfo = function () {
     url: queryURL,
     method: 'GET'
   }).then(function (response) {
-    //console.log response to test
-    console.log(response);
 
     //Use response to create const for items in the object
     const companyName = response.quote.companyName;
@@ -33,10 +31,8 @@ const displayStockInfo = function () {
         <td>${stockPrice}</td>
         <td><a class='anchor'href='${companyNews}'>Click for news!</a></td>
       </tr>)`);
-
     $('.stocks').append(nameHolder);
   });
-
 }
 //This listener allows stock info to be appended when stock btn is pushed
 $('#buttons-view').on('click', '.stock-btn', displayStockInfo);
@@ -86,12 +82,10 @@ const validateSymbol = function (event) {
     method: 'GET'
   }).then(function (responseTwo) {
     const validationList = responseTwo;
-    console.log(responseTwo);
     //Loop through array of objects returned by AJAX
     for (let i = 0; i < validationList.length; i++) {
       //IF USER input uppercase strictly equal to stock symbol in AJAX return
       if (stockUC === responseTwo[i].symbol) {
-        console.log(stock);
         //Push item in array
         stocks.push(stockUC);
         //Dynamically generated stock buttons
@@ -101,14 +95,10 @@ const validateSymbol = function (event) {
         newButtonHTML.on('click', displayStockInfo);
         //Append newly generated buttons to buttons-view div
         $('#buttons-view').append(newButtonHTML);
-       
         render();
-        // return;
       } else if( ($('.clear').removeClass('hide')) === true && ($('h2').removeClass('hide')) === true) {
         $('.clear').addClass('hide');
         $('h2').addClass('hide');
-        // $('#stock-input').val('');
-
       }else{
         $('.clear').removeClass('hide');
         $('h2').removeClass('hide');
@@ -201,7 +191,6 @@ const searchStock = function (event) {
       }else{
         $('.clear').removeClass('hide');
         $('h2').removeClass('hide');
-        // $('#search-input').val('');
     }
   };
   });
