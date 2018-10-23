@@ -165,29 +165,21 @@ const searchStock = function (event) {
   //preventDefault prevents
   event.preventDefault();
   //Variable stock assigned stock input id
-  const stockInput = $('#search-input').val().trim();
-
-
-
+  const stockInput = $('#search-input').val().trim().toLowerCase();
   //URL for all data symbols on IEX trading
   const apiSymbols = 'https://api.iextrading.com/1.0/ref-data/symbols';
-
   //AJAX Call
   $.ajax({
     url: apiSymbols,
     method: 'GET'
   }).then(function (responseFour) {
     // const validationListTwo = responseFour;
-    console.log(responseFour);
     //Loop through array of objects returned by AJAX
     for (let i = 0; i < responseFour.length; i++) {
       //IF USER input uppercase strictly equal to stock symbol in AJAX return
-      if (stockInput === responseFour[i].name) {
-        // console.log('hello');
-        //Push item in array
-        console.log(responseFour[i].name);
+      const currStock = responseFour[i].name.toLowerCase();
+      if (currStock.match(stockInput)) {
         let stockSym = responseFour[i].symbol;
-        // searchResult.push(responseFour[i].symbol);
         //Dynamically generated stock buttons
         let searchResultHTML = $(`<div class="card" style="width: 18rem; float: left;">
         <div class="card-body">
@@ -195,8 +187,6 @@ const searchStock = function (event) {
           <p class="card-text">${stockSym}</p>
         </div>
       </div>`);
-
-
         //Append newly generated buttons to buttons-view div
         $('.search-result').append(searchResultHTML);
         render();
