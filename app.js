@@ -1,5 +1,31 @@
 // Initial array of stocks
 const stocks = ['FB', 'AAPL', 'TSLA', 'GOOG'];
+
+// Function for displaying stock buttons initally when page loads
+const render = function () {
+  // Deleting the stocks prior to adding new stocks
+  $('#buttons-view').empty();
+  // Looping through the array of stocks to render initial buttons
+  for (let i = 0; i < stocks.length; i++) {
+    // Then dynamicaly generating buttons for each stock in the array
+    const newButton = $('<button>');
+    // Adding a class of stock-btn to our button
+    newButton.addClass('stock-btn');
+    newButton.addClass('btn btn-primary');
+    newButton.addClass('btn-dark');
+    // Adding a data-attribute
+    newButton.attr('data-name', stocks[i]);
+    // Providing the initial button text
+    newButton.text(stocks[i]);
+    // Adding the button to the buttons-view div
+    $('#buttons-view').append(newButton);
+    $('.clear').addClass('hide');
+    $('h2').addClass('hide');
+  }
+}
+// Calling the renderButtons function to display the intial buttons
+render();
+
 // displaystockInfo function displays stock info as a table when stock btns get pressed (#buttons-view)
 const displayStockInfo = function () {
 
@@ -36,33 +62,6 @@ const displayStockInfo = function () {
 }
 //This listener allows stock info to be appended when stock btn is pushed
 $('#buttons-view').on('click', '.stock-btn', displayStockInfo);
-
-// Function for displaying stock buttons initally when page loads
-const render = function () {
-  // Deleting the stocks prior to adding new stocks
-  // (this is necessary otherwise you will have repeat buttons)
-  $('#buttons-view').empty();
-  // Looping through the array of stocks to render initial buttons
-  for (let i = 0; i < stocks.length; i++) {
-    // Then dynamicaly generating buttons for each stock in the array
-    const newButton = $('<button>');
-    // Adding a class of stock-btn to our button
-    newButton.addClass('stock-btn');
-    newButton.addClass('btn btn-primary');
-    newButton.addClass('btn-dark');
-    // Adding a data-attribute
-    newButton.attr('data-name', stocks[i]);
-    // Providing the initial button text
-    newButton.text(stocks[i]);
-    // Adding the button to the buttons-view div
-    $('#buttons-view').append(newButton);
-    $('.clear').addClass('hide');
-    $('h2').addClass('hide');
-  }
-}
-// Calling the renderButtons function to display the intial buttons
-render();
-
 
 
 //This function appends new stock buttons when you enter them
