@@ -13,7 +13,7 @@ const render = function () {
     newButton.addClass('stock-btn');
     newButton.addClass('btn btn-primary');
     newButton.addClass('btn-dark');
-    // Adding a data-attribute
+    // Adding a data-attribute with the stock name to access the value later
     newButton.attr('data-name', stocks[i]);
     // Providing the initial button text
     newButton.text(stocks[i]);
@@ -29,8 +29,10 @@ render();
 // displaystockInfo function displays stock info as a table when stock btns get pressed (#buttons-view)
 const displayStockInfo = function () {
 
-  // Grab the stock symbol from the button clicked and add it to the queryURL
+  // Grab the stock symbol from the button clicked and add it to the queryURL using keyword this
   const stock = $(this).attr('data-name');
+  
+  //Keyword this = <button class="stock-btn btn btn-primary btn-dark" data-name="TSLA">TSLA</button>
   const queryURL = `https://api.iextrading.com/1.0/stock/${stock}/batch?types=quote,logo,news&range=1m&last=10&filter=symbol,companyName,latestPrice,headline,source,url`;
 
   // Creating an AJAX call for the specific stock button being clicked
@@ -38,29 +40,49 @@ const displayStockInfo = function () {
     url: queryURL,
     method: 'GET'
   }).then(function (response) {
-
+    $('.stockNewsDump').empty();
     //Use response to create const for items in the object
     const companyName = response.quote.companyName;
     const stockSymbol = response.quote.symbol;
     const stockPrice = response.quote.latestPrice;
     const logo = response.logo.url;
-    // const companyNews = response.news[0].headline;
-    const companyNews = response.news[0].url;
-
-    // Creating a table to be appended displaying stock info
 
     const nameHolder = $('#stocks-table').html(`
-      <tr>
-        <td><img src="${logo}" /></td>
-        <td>${companyName}</td>
-        <td>${stockSymbol}</td>
-        <td>${stockPrice}</td>
-        <td><a class='anchor'href='${companyNews}'>Click for news!</a></td>
-      </tr>)`);
-    $('.stocks').append(nameHolder);
+    <tr>
+      <td class="font-family"><img src="${logo}" /></td>
+      <td class="font-family">${companyName}</td>
+      <td class="font-family">${stockSymbol}</td>
+      <td class="font-family">$${stockPrice}USD</td>
+    </tr>)`);
+  $('.stocks').append(nameHolder);
+    // const companyNews = response.news[0].headline;
+    // const companyNews = response.news[0].url;
+    for(let i = 0; i < response.news.length; i++){
+      const newsHeadline = response.news[i].headline;
+      const newsUrl = response.news[i].url;
+      const newsSource = response.news[i].source
+     
+      // $('.stockNewsDump').append( `<a href="${newsUrl}" target="blank"><div class="newsbox"><h3>${newsHeadline}</h3><p>${newsSource}</p></div></a>`
+      // );
+
+      $('.stockNewsDump').append(`<div class="card">
+      <div class="card-header">
+        ${stock} News
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">News Source: ${newsSource}</h5>
+        <p class="card-text">${newsHeadline}</p>
+        <a href="${newsUrl}" target="_blank" class="btn btn-secondary">Read Article</a>
+      </div>
+    </div>`)
+      
+    }
+      
+    
   });
 }
-//This listener allows stock info to be appended when stock btn is pushed
+//This listener allows stock info to be appended to table when stock btn is pushed
+//Buttons-view id div on line 7 and .stock-btn is class created on line 13
 $('#buttons-view').on('click', '.stock-btn', displayStockInfo);
 
 

@@ -1,4 +1,5 @@
 body{
+    font-family: 'Bree Serif', serif;
     background-image: url('assets/wallst.jpg');
     background-repeat:no-repeat;
     background-size:cover;
@@ -37,4 +38,7 @@ p{
 }
 .hide{
     display: none;
+}
+.card{
+    margin-bottom:20px;
 }

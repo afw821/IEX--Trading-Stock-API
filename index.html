@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <title>Stock API</title>
@@ -24,8 +25,10 @@
                     <div class="container">
                         <h1 class="display-4">Stock Information</h1>
                         <hr>
-                        <p>Put a valid stock symbol in the stock field below and click add stock symbol. Click on the stock
-                            symbol to show its information. Add stock symbols to your favorites list by entering a stock
+                        <p>Put a valid stock symbol in the stock field below and click add stock symbol. Click on the
+                            stock
+                            symbol to show its information. Add stock symbols to your favorites list by entering a
+                            stock
                             symbol and clicking add to favorites!</p>
                         <table class="table">
                             <thead class="thead-dark">
@@ -34,7 +37,6 @@
                                     <th scope="col">Company Name</th>
                                     <th scope="col">Stock Symbol</th>
                                     <th scope="col">Price</th>
-                                    <th scope="col">News</th>
                                 </tr>
                             </thead>
                     </div>
@@ -48,6 +50,13 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <div class="stockNewsDump">
+
+                </div>
+            </div>
+        </div>
 
 
         <div class="row">
@@ -58,7 +67,8 @@
                     </div>
                     <div class="card-body">
 
-                        <p class="card-text">Click on the valid stock buttons below to find out more information about the
+                        <p class="card-text">Click on the valid stock buttons below to find out more information about
+                            the
                             stock.
                         </p>
                         <div id="buttons-view"></div>
@@ -75,7 +85,8 @@
                         <div class="input-group-prepend">
                             <button class="btn  btn-dark" id="add-stock" type="button">Add Stock Symbol</button>
                         </div>
-                        <input type="text" class="form-control" id="stock-input" placeholder="Enter a valid stock symbol" aria-label="" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" id="stock-input" placeholder="Enter a valid stock symbol"
+                            aria-label="" aria-describedby="basic-addon1">
                     </div>
                 </form>
             </div>
@@ -83,9 +94,11 @@
                 <form id='stock-form'>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <button class="btn btn-primary btn-dark favorite" id="add-stock" type="button">Add to Favorites</button>
+                            <button class="btn btn-primary btn-dark favorite" id="add-stock" type="button">Add to
+                                Favorites</button>
                         </div>
-                        <input type="text" class="form-control" id="favorite-input" placeholder="Enter favorite stock symbol" aria-label="" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" id="favorite-input" placeholder="Enter favorite stock symbol"
+                            aria-label="" aria-describedby="basic-addon1">
                     </div>
                 </form>
             </div>
@@ -104,10 +117,11 @@
                         <form id='stock-form'>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <button class="btn btn-primary btn-dark" id="search-stock" type="button">Search for Stock</button>
+                                    <button class="btn btn-primary btn-dark" id="search-stock" type="button">Search for
+                                        Stock</button>
                                 </div>
-                                <input type="text" class="form-control" id="search-input" placeholder="Enter company name to search for stock symbol" aria-label=""
-                                    aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" id="search-input" placeholder="Enter company name to search for stock symbol"
+                                    aria-label="" aria-describedby="basic-addon1">
                             </div>
                         </form>
                         <div class="search-result"></div>
@@ -124,10 +138,10 @@
         <div class='row'>
             <div class='col-md-2'></div>
             <div class='col-md-10'>
-                
+
                 <h2 class='display-4 hide' style="text-align: center; font-weight:bolder;">Favorite Stocks</h2>
                 <div class='favorite-stocks'></div>
-                
+
             </div>
         </div>
         <button type="button" class="btn btn-primary btn-dark clear">Clear Favorites</button>
